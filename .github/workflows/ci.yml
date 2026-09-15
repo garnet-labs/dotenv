@@ -18,6 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Garnet Runtime Visibility
+        # Profile a single representative Linux leg to avoid duplicate/noisy
+        # profiles across the Node version matrix.
+        if: matrix.node-version == '20.x'
         uses: garnet-org/action@v2
         with:
           api_token: ${{ secrets.GARNET_API_TOKEN }}
